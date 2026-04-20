@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
+import { Property, PropertyFormData, Facility } from '@/types/property';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
@@ -10,7 +11,7 @@ if (!supabaseUrl || !supabaseAnonKey) {
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 // Helper functions untuk properties
-export const getProperties = async () => {
+export const getProperties = async (): Promise<Property[]> => {
   const { data, error } = await supabase
     .from('properties')
     .select('*')
@@ -20,7 +21,7 @@ export const getProperties = async () => {
   return data;
 };
 
-export const getPropertyById = async (id: number) => {
+export const getPropertyById = async (id: number): Promise<Property> => {
   const { data, error } = await supabase
     .from('properties')
     .select('*')
@@ -31,7 +32,7 @@ export const getPropertyById = async (id: number) => {
   return data;
 };
 
-export const createProperty = async (property: any) => {
+export const createProperty = async (property: PropertyFormData): Promise<Property> => {
   const { data, error } = await supabase
     .from('properties')
     .insert([property])
@@ -42,7 +43,7 @@ export const createProperty = async (property: any) => {
   return data;
 };
 
-export const updateProperty = async (id: number, property: any) => {
+export const updateProperty = async (id: number, property: Partial<PropertyFormData>): Promise<Property> => {
   const { data, error } = await supabase
     .from('properties')
     .update({ ...property, updated_at: new Date().toISOString() })
@@ -54,7 +55,7 @@ export const updateProperty = async (id: number, property: any) => {
   return data;
 };
 
-export const deleteProperty = async (id: number) => {
+export const deleteProperty = async (id: number): Promise<void> => {
   const { error } = await supabase
     .from('properties')
     .delete()
@@ -64,7 +65,7 @@ export const deleteProperty = async (id: number) => {
 };
 
 // Facilities functions
-export const getFacilities = async () => {
+export const getFacilities = async (): Promise<Facility[]> => {
   const { data, error } = await supabase
     .from('facilities')
     .select('*')
@@ -75,7 +76,7 @@ export const getFacilities = async () => {
 };
 
 // Image upload functions - uses server-side API to bypass RLS
-export const uploadPropertyImage = async (file: File, propertyId: string) => {
+export const uploadPropertyImage = async (file: File, propertyId: string): Promise<string> => {
   try {
     const formData = new FormData();
     formData.append('file', file);
@@ -95,7 +96,7 @@ export const uploadPropertyImage = async (file: File, propertyId: string) => {
 
     console.log('Upload successful:', result.url);
     return result.url;
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('Error in uploadPropertyImage:', error);
     throw error;
   }

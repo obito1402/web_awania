@@ -26,16 +26,17 @@ export async function testUpload() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ filepath: `test-${Date.now()}.txt` }),
       });
-    } catch (deleteError) {
+    } catch (deleteError: unknown) {
       // Cleanup error tidak perlu block
     }
 
     return { success: true, message: 'Storage siap digunakan!' };
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('Error testing upload:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Upload test gagal - pastikan SUPABASE_SERVICE_ROLE_KEY di .env.local';
     return {
       success: false,
-      message: error.message || 'Upload test gagal - pastikan SUPABASE_SERVICE_ROLE_KEY di .env.local',
+      message: errorMessage,
     };
   }
 }

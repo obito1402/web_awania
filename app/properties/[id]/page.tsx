@@ -20,7 +20,7 @@ export default function PropertyDetail() {
       try {
         const data = await getPropertyById(Number(id));
         setProperty(data);
-      } catch (error) {
+      } catch (error: unknown) {
         console.error('Error fetching property:', error);
       } finally {
         setLoading(false);

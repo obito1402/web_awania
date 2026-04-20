@@ -48,7 +48,7 @@ export async function POST(req: NextRequest) {
       success: true,
       url: data.publicUrl,
     });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('API upload error:', error);
     return NextResponse.json(
       { error: 'Upload failed' },
@@ -88,7 +88,7 @@ export async function DELETE(req: NextRequest) {
     }
 
     return NextResponse.json({ success: true });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('API delete error:', error);
     return NextResponse.json(
       { error: 'Delete failed' },

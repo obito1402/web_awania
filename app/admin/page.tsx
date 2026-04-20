@@ -56,7 +56,7 @@ export default function AdminPage() {
       ]);
       setProperties(propertiesData);
       setFacilities(facilitiesData);
-    } catch (error) {
+    } catch (error: unknown) {
       console.error('Error fetching data:', error);
     } finally {
       setLoading(false);
@@ -75,7 +75,7 @@ export default function AdminPage() {
       } else {
         setSetupMessage('❌ ' + testResult.message);
       }
-    } catch (error) {
+    } catch (error: unknown) {
       console.error('Setup error:', error);
       setSetupMessage('❌ Terjadi kesalahan');
     }
@@ -148,7 +148,7 @@ export default function AdminPage() {
         ...prev,
         images: allImages,
       }));
-    } catch (error) {
+    } catch (error: unknown) {
       console.error('Error uploading images:', error);
       alert('Gagal upload gambar');
     } finally {
@@ -184,7 +184,7 @@ export default function AdminPage() {
 
       handleResetForm();
       fetchData();
-    } catch (error) {
+    } catch (error: unknown) {
       console.error('Error saving property:', error);
       alert('Terjadi kesalahan saat menyimpan properti');
     }
@@ -221,7 +221,7 @@ export default function AdminPage() {
         await deleteProperty(id);
         alert('Properti berhasil dihapus!');
         fetchData();
-      } catch (error) {
+      } catch (error: unknown) {
         console.error('Error deleting property:', error);
         alert('Terjadi kesalahan saat menghapus properti');
       }
