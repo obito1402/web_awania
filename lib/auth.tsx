@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState, ReactNode, JSX } from 'react';
 import { getCurrentUser, onAuthStateChange } from './supabase';
 
 interface AuthContextType {
@@ -11,12 +11,15 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export function AuthProvider({ children }: { children: React.ReactNode }): React.ReactNode {
+type AuthProviderProps = {
+  children: ReactNode;
+};
+
+export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check current session
     const checkUser = async () => {
       try {
         const currentUser = await getCurrentUser();
@@ -31,7 +34,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }): React
 
     checkUser();
 
-    // Subscribe to auth changes
     const subscription = onAuthStateChange((newUser) => {
       setUser(newUser);
       setLoading(false);
@@ -54,7 +56,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }): React
   );
 }
 
-export function useAuth() {
+export function useAuth(): AuthContextType {
   const context = useContext(AuthContext);
   if (context === undefined) {
     throw new Error('useAuth must be used within AuthProvider');
