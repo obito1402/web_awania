@@ -18,7 +18,7 @@ export default function PropertyDetail() {
   useEffect(() => {
     const fetchProperty = async () => {
       try {
-        const data = await getPropertyById(id);
+        const data = await getPropertyById(Number(id));
         setProperty(data);
       } catch (error) {
         console.error('Error fetching property:', error);
