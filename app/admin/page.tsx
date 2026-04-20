@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Navbar from '@/components/Navbar';
 import {
   getProperties,
   createProperty,
@@ -12,7 +13,6 @@ import {
 import { testUpload } from '@/lib/storage-setup';
 import { Property, PropertyFormData, Facility } from '@/types/property';
 import { formatPrice, formatPriceInput, parsePrice } from '@/lib/utils';
-import Link from 'next/link';
 
 export default function AdminPage() {
   const [properties, setProperties] = useState<Property[]>([]);
@@ -256,19 +256,7 @@ export default function AdminPage() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-emerald-50 to-white">
       {/* Navigation */}
-      <nav className="bg-white shadow-sm sticky top-0 z-50 border-b border-emerald-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
-          <h1 className="text-2xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">🏠 Admin Dashboard</h1>
-          <div className="flex gap-4">
-            <Link
-              href="/"
-              className="text-emerald-600 hover:text-emerald-700 font-semibold hover:underline transition-colors"
-            >
-              ← Kembali ke Website
-            </Link>
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

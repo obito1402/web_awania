@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
-import Link from 'next/link';
+import Navbar from '@/components/Navbar';
 import { Property } from '@/types/property';
 import { getPropertyById } from '@/lib/supabase';
 import { formatPrice } from '@/lib/utils';
@@ -77,19 +77,7 @@ export default function PropertyDetail() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-emerald-50 to-white">
       {/* Header Navigation */}
-      <nav className="bg-white shadow-sm sticky top-0 z-40 border-b border-emerald-100">
-        <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-          <Link href="/" className="text-2xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-            🏠 Awania Property
-          </Link>
-          <Link
-            href="/"
-            className="text-emerald-600 hover:text-emerald-700 font-semibold hover:underline transition-colors"
-          >
-            ← Kembali
-          </Link>
-        </div>
-      </nav>
+      <Navbar />
 
       <div className="max-w-6xl mx-auto px-4 py-8">
         {/* Image Gallery */}

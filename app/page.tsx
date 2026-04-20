@@ -3,9 +3,9 @@
 import { useEffect, useState } from 'react';
 import PropertyCard from '@/components/PropertyCard';
 import PropertyFilter from '@/components/PropertyFilter';
+import Navbar from '@/components/Navbar';
 import { getProperties } from '@/lib/supabase';
 import { Property } from '@/types/property';
-import Link from 'next/link';
 
 interface FilterOptions {
   type: string;
@@ -83,19 +83,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-emerald-50 via-cyan-50 to-white">
       {/* Navigation */}
-      <nav className="bg-white shadow-sm sticky top-0 z-50 border-b border-emerald-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
-          <h1 className="text-2xl font-bold bg-gradient-to-r from-emerald-600 to-cyan-600 bg-clip-text text-transparent">
-            🏠 Awania Property
-          </h1>
-          <Link
-            href="/admin"
-            className="bg-gradient-to-r from-emerald-600 to-emerald-500 text-white px-5 py-2 rounded-lg font-semibold hover:shadow-lg hover:shadow-emerald-200 transition-all"
-          >
-            Admin
-          </Link>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-emerald-600 via-teal-500 to-cyan-600 text-white py-20 overflow-hidden">

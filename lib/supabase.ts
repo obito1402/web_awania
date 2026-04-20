@@ -101,3 +101,42 @@ export const uploadPropertyImage = async (file: File, propertyId: string): Promi
     throw error;
   }
 };
+
+// Authentication functions
+export const signUp = async (email: string, password: string) => {
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+  });
+
+  if (error) throw error;
+  return data;
+};
+
+export const signIn = async (email: string, password: string) => {
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email,
+    password,
+  });
+
+  if (error) throw error;
+  return data;
+};
+
+export const signOut = async () => {
+  const { error } = await supabase.auth.signOut();
+  if (error) throw error;
+};
+
+export const getCurrentUser = async () => {
+  const { data, error } = await supabase.auth.getUser();
+  if (error) throw error;
+  return data.user;
+};
+
+export const onAuthStateChange = (callback: (user: any) => void) => {
+  const { data } = supabase.auth.onAuthStateChange((event, session) => {
+    callback(session?.user || null);
+  });
+  return data?.subscription;
+};
