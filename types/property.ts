@@ -13,6 +13,7 @@ export interface Property {
   description?: string;
   facilities: string[];
   images: string[];
+  whatsapp_number?: string;
   created_at: string;
   updated_at: string;
 }
