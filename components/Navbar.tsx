@@ -1,12 +1,13 @@
 'use client';
 
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { useAuth } from '@/lib/auth';
 import { signOut } from '@/lib/supabase';
 
 export default function Navbar() {
   const router = useRouter();
+  const pathname = usePathname();
   const { user } = useAuth();
 
   const handleLogout = async () => {
@@ -32,12 +33,22 @@ export default function Navbar() {
               <span className="text-sm text-gray-600">
                 {user.email}
               </span>
-              <Link
-                href="/admin"
-                className="bg-gradient-to-r from-emerald-600 to-emerald-500 text-white px-4 py-2 rounded-lg font-semibold hover:shadow-lg hover:shadow-emerald-200 transition-all text-sm"
-              >
-                Dashboard
-              </Link>
+              {pathname !== '/admin' && (
+                <Link
+                  href="/admin"
+                  className="bg-gradient-to-r from-emerald-600 to-emerald-500 text-white px-4 py-2 rounded-lg font-semibold hover:shadow-lg hover:shadow-emerald-200 transition-all text-sm"
+                >
+                  Dashboard
+                </Link>
+              )}
+              {pathname === '/admin' && (
+                <Link
+                  href="/"
+                  className="bg-gradient-to-r from-blue-600 to-blue-500 text-white px-4 py-2 rounded-lg font-semibold hover:shadow-lg hover:shadow-blue-200 transition-all text-sm"
+                >
+                  ← Home
+                </Link>
+              )}
               <button
                 onClick={handleLogout}
                 className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-semibold transition-all text-sm"
