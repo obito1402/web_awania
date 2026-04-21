@@ -23,7 +23,7 @@ export default function Navbar() {
     <nav className="bg-white shadow-sm sticky top-0 z-50 border-b border-emerald-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
         <Link href="/" className="text-2xl font-bold bg-gradient-to-r from-emerald-600 to-cyan-600 bg-clip-text text-transparent hover:opacity-80 transition-opacity">
-          🏠 Awania Property
+          🏠 Aruna Property
         </Link>
 
         <div className="flex items-center gap-3">

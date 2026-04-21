@@ -18,7 +18,7 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Awania Property - Cari Tempat Tinggal Modern",
+  title: "Aruna Property - Cari Tempat Tinggal Modern",
   description: "Platform properti terpercaya untuk kostan, apartemen, dan ruko modern",
 };
 

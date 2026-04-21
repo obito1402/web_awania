@@ -39,7 +39,7 @@ export default function LoginPage() {
         {/* Logo/Brand */}
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 bg-clip-text text-transparent mb-2">
-            Awania
+            Aruna
           </h1>
           <p className="text-gray-600">Admin Login</p>
         </div>

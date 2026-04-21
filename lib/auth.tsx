@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useEffect, useState, ReactNode, JSX } from 'react';
-import { getCurrentUser, onAuthStateChange } from './supabase';
+import { onAuthStateChange } from './supabase';
 
 interface AuthContextType {
   user: any;
@@ -20,27 +20,21 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const checkUser = async () => {
-      try {
-        const currentUser = await getCurrentUser();
-        setUser(currentUser);
-      } catch (error) {
-        console.error('Error checking user:', error);
-        setUser(null);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    checkUser();
-
+    // Only subscribe to auth state changes, don't call getCurrentUser
+    // getCurrentUser can fail if session is not initialized yet
     const subscription = onAuthStateChange((newUser) => {
       setUser(newUser);
       setLoading(false);
     });
 
+    // Set loading to false after 2 seconds anyway (timeout)
+    const timeout = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
     return () => {
       subscription?.unsubscribe();
+      clearTimeout(timeout);
     };
   }, []);
 
